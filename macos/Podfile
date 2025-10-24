@@ -1,0 +1,36 @@
+platform :osx, '12.0'
+ENV['COCOAPODS_DISABLE_STATS'] = 'true'
+
+project 'Runner', {
+  'Debug' => :debug,
+  'Profile' => :release,
+  'Release' => :release,
+}
+
+def flutter_root
+  generated_xcode_build_settings_path = File.expand_path(File.join('..', 'Flutter', 'ephemeral', 'Flutter-Generated.xcconfig'), __FILE__)
+  raise "#{generated_xcode_build_settings_path} must exist. Run \"flutter pub get\" first" unless File.exist?(generated_xcode_build_settings_path)
+  File.foreach(generated_xcode_build_settings_path) { |line| return $1.strip if line =~ /FLUTTER_ROOT\=(.*)/ }
+end
+
+require File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'podhelper'), flutter_root)
+flutter_macos_podfile_setup
+
+target 'Runner' do
+  use_frameworks! :linkage => :dynamic   # <-- important for Firebase Swift pods
+
+  flutter_install_all_macos_pods File.dirname(File.realpath(__FILE__))
+
+  target 'RunnerTests' do
+    inherit! :search_paths
+  end
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |t|
+    t.build_configurations.each do |c|
+      c.build_settings['MACOSX_DEPLOYMENT_TARGET'] = '12.0'
+    end
+    flutter_additional_macos_build_settings(t)
+  end
+end
