@@ -1,4 +1,4 @@
-package com.example.funkinkaraoke_singer
+package com.funkin.karaoke
 
 import io.flutter.embedding.android.FlutterActivity
 

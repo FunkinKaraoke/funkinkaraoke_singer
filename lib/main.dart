@@ -24,9 +24,19 @@ import 'package:funkinkaraoke_singer/screens/my_requests.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  // Try to initialize Firebase, catch duplicate error and continue
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } on FirebaseException catch (e) {
+    if (e.code == 'duplicate-app') {
+      debugPrint('Firebase already initialized (Android auto-init), continuing...');
+      // App already exists, just continue
+    } else {
+      rethrow;
+    }
+  }
 
   // Platform-specific auth behavior
   try {

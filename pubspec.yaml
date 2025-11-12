@@ -1,5 +1,5 @@
 name: funkinkaraoke_singer
-description: "A new Flutter project."
+description: "submit songs for Funkin Karaoke"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.1+2
+version: 1.0.1+6
 
 environment:
   sdk: ^3.9.0
@@ -57,15 +57,15 @@ dev_dependencies:
   flutter_launcher_icons: ^0.13.1
 
 flutter_launcher_icons:
-    # Turn on the platforms you need
-    android: true
-    ios: true
+  android: true
+  ios: true
+  image_path: "assets/icon/app_icon.png"  # Your square logo for iOS
 
-    # Simple: one file for everything
-    image_path: assets/icons/app_icon.png
+  # Android adaptive icon configuration
+  adaptive_icon_background: "assets/icon/app_icon_bg.png" # Change to your desired background color
+  adaptive_icon_foreground: "assets/icon/app_icon_fg.png"  # Your foreground with padding
 
-    # iOS-specific tweaks
-    remove_alpha_ios: true
+  remove_alpha_ios: true
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
