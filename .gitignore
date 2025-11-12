@@ -56,3 +56,9 @@ key.properties
 # Build artifacts
 build/
 .android/
+
+# Firebase files
+android/app/google-services.json
+android._backup_*/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+lib/firebase_options.dart
